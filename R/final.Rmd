@@ -1,0 +1,315 @@
+---
+title: "Take Home Final"
+subtitle: "Due 06/13 @ 11:59p"
+author: "WRITE YOUR NAME HERE"
+output: html_document
+---
+
+
+## README
+
+Complete the following questions below and show all work. You must submit a compiled html file with all code and answers in this document on Canvas. Make sure to write your name above where it says "WRITE YOUR NAME HERE". Include it within the quotation marks.
+
+The total amount of points possible is 100. You can find a table at the bottom of the document that denotes how points are allocated to each question. Following previous guidelines, stay within the `tidyverse`, `broom`, and `here` packages. You may not use other packages, although base R functions are allowed. All code must be placed in code blocks and all regression estimates must be presented in a `broom` tidy format.
+
+__Style Points__. Good code should be easy to read and presentation is an important skill. 10 points on the exam are dedicated for style points. Style points are determined by the following criteria:
+
+- Your submission is organized and follows the directions
+- Your written answers are clear
+- Code is concise and easy to read. It follows the principles of the tidyverse as introduced in koan assignments
+- Plots are labelled and clearly presented
+
+_Note_: Before answering the following questions, make sure to compile the document to make sure that everything is working properly. As you answer each question, compile after each question to make sure you are not making any errors. If you are experiencing an error, read the error carefully. One tactic is to selectively delete questions/sections until the report compiles. This will help you narrow down where the coding error is occurring.
+
+#### Data
+
+The data set used on this exam come from the 2018 American Community Survey (ACS), which was downloaded from [IPUMS](https://ipums.org/).  At the bottom of this document, you will find a table codebook that describes the variables in the data set.
+
+#### Integrity
+
+If you are suspected of cheating, you will receive a zero—for the assignment and possibly for the course.  Collaboration is not allowed. All work must be your own. If you have any questions about what constitutes cheating, please ask.
+
+## Questions
+
+### Setup
+
+__Q01__. Use the following code block to load the data. It should just work, so don't mess with it. Compile the document and proceed to the next question.
+
+```{r, include=FALSE}
+# Install the 'here' package if it is not already installed
+if (!requireNamespace("here", quietly = TRUE)) {
+  install.packages("here")
+}
+
+# Load the 'here' package
+library(here)
+library(tidyverse)
+library(broom)
+
+# Define the path to the data file using the 'here' package
+ipums_tbl = here("data", "ipums_2018.csv") %>%
+  readr::read_csv() 
+```
+
+---
+
+### Explore.
+
+__Q02__. Answer the following questions in written form---I don't need to see the output. 
+
+a. How many observations are in the data set?
+b. How many columns?
+c. What variable corresponds to the length of time that the individual typically travels to work?
+
+---
+
+__Q03__. How many individuals are English only speaking citizens?
+
+```{r}
+
+# Write your code here
+
+```
+
+---
+
+
+__Q04__. Currently, income is measured in tens of thousands of dollars. Change the units to thousands for the remainder of the assignment.
+
+```{r}
+
+# Write your code here
+
+```
+
+
+---
+
+__Q05__. What is the age range of the individuals in the data set?
+
+```{r}
+
+# Write your code here
+
+```
+
+
+---
+
+
+__Q06__. Which state has the highest average personal income? Which state has the lowest?
+
+```{r}
+
+# Write your code here
+
+```
+
+---
+
+__Q07__. Do your answers to the previous question change after dropping rural counties from the analysis?
+
+```{r}
+
+# Write your code here
+
+```
+
+---
+
+__Q08__. What is the difference in average personal income between those who graduated from college and those who did not?
+
+
+```{r}
+
+# Write your code here
+
+```
+
+---
+
+
+__Q09__. Plot a histogram of individuals' commute times. Label your axis and include a title.
+
+```{r}
+
+# Write your code here
+
+```
+
+
+---
+
+
+__Q10__. Compare the distributions of personal income for women vs. men. Are the differences at the extremes of the distribution or at the center? There should be two plots, but 1 style point if you manage to fit both distributions clearly on one plot.
+
+```{r}
+
+# Write your code here
+
+```
+  
+
+---
+
+__Q11__. Create a scatter plot with commute time on the x-axis and personal income on the y-axis. Label your axis and include a title. Does the relationship seem to be positive or negative?
+
+```{r}
+
+# Write your code here
+
+```
+
+---
+
+__Q12__. Regress personal income on commute time. Report your results and interpret the coefficients.
+
+```{r}
+
+# Write your code here
+
+```
+
+---
+
+__Q13__. Suppose I am worried that the fourth classical assumption, homoskedasticity. Plot the residuals of the previous regression against commute time. Do you think the assumption is violated? 
+
+```{r}
+
+# Write your code here
+
+```
+
+
+---
+
+__Q14__. Suppose we are concerned about the possibility of omitted variable bias. What variables (that are included in the data set) might be omitted that could bias the coefficient on `time_commuting`? How might these variables be related to `time_commuting` and `personal_income`? For at least one, sign the bias (positive or negative) and determine if omitting the variable over or under predicts the true value of the coefficient on `time_commuting`.
+
+---
+
+__Q15__. Now regress personal income on time commuting on the variable that you picked in the previous question. How did the parameter on `time_commuting` change?
+
+```{r}
+
+# Write your code here
+
+```
+
+
+---
+
+__Q16__. Regress personal income on whether the individual graduated from college. Who is the reference group? Interpret the results. How does it compare to the result from __Q08__? Explain.
+
+```{r}
+# Write your code here
+```
+
+---
+
+__Q17__. Regress personal income on commute time, age, whether the individual is married, whether the individual has been married more than once, and whether the individual graduated from college. Report your results.
+
+```{r}
+
+# Write your code here
+
+```
+
+---
+
+__Q18__. Test the joint hypothesis at the 95% level that the coefficients on `i_married` and `i_married_mult` are equal to zero. Clearly state the null and alternative hypotheses.
+
+```{r}
+
+# Write your code here
+
+```
+
+
+---
+
+__Q19__. Regress log personal income on age, whether the individual graduated from college, and indicators for race. Interpret the coefficients relative to the reference group your choice.
+
+```{r}
+
+# Write your code here
+
+```
+
+
+---
+
+__Q20__. Regress log personal income on age, whether the individual graduated from college, indicators for race, and interactions between race indicators and whether the individual graduated from college. Report your results and interpret the coefficients on 
+
+- `i_grad_college`
+- The interaction between `i_grad_college` and `i_asian`?
+
+```{r}
+
+# Write your code here
+
+```
+
+<br>
+<br>
+
+---
+
+## Points
+
+| Question             | Points        |
+|----------------------|---------------|
+| Q01                  | 1             |
+| Q02                  | 1             |
+| Q03                  | 4             |
+| Q04                  | 4             |
+| Q05                  | 2             |
+| Q06                  | 4             |
+| Q07                  | 4             |
+| Q08                  | 4             |
+| Q09                  | 2             |
+| Q10                  | 4             |
+| Q11                  | 2             |
+| Q12                  | 2             |
+| Q13                  | 4             |
+| Q14                  | 6             |
+| Q15                  | 4             |
+| Q16                  | 4             |
+| Q17                  | 4             |
+| Q18                  | 4             |
+| Q19                  | 6             |
+| Q20                  | 6             |
+| Style Points         | 10            |
+| Total                | 100           |
+
+
+
+---
+
+## Codebook
+
+| Variable             | Description                                                                 |
+|----------------------|-----------------------------------------------------------------------------|
+| state                | State abbreviation                                                          |
+| age                  | The individual's age (in years)                                             |
+| i_urban              | Binary indicator for whether home county is 'urban'                         |
+| i_citizen            | Binary indicator for whether the individual is a citizen (naturalized or born.) |
+| i_noenglish          | Binary indicator for whether the individual speaks English                  |
+| i_only_english       | Binary indicator for whether the individual speaks ONLY English             |
+| i_drive_to_work      | Binary indicator for whether the individual drives to work or takes a personal car |
+| i_asian              | Binary indicator for whether the individual identified as Asian             |
+| i_black              | Binary indicator for whether the individual identified as Black             |
+| i_indigenous         | Binary indicator for whether the individual identified with a group indigenous to North Am. |
+| i_white              | Binary indicator for whether the individual identified as White             |
+| i_female             | Binary indicator for whether the individual identified as Female            |
+| i_male               | Binary indicator for whether the individual identified as Male              |
+| i_grad_college       | Binary indicator for whether the individual graduated college               |
+| i_grad_highschool    | Binary indicator for whether the individual graduated high school           |
+| i_married            | Binary indicator for whether the individual was married at the time of the sample |
+| i_married_mult       | Binary indicator for whether the individual has been married multiple times at the time of the sample |
+| personal_income      | Total (annual) personal income (tens of thousands of dollars)               |
+| i_health_insurance   | Binary indicator for whether the individual has health insurance            |
+| i_internet           | Binary indicator for whether the individual has access to the internet      |
+| time_depart          | The time that the individual typically leaves for work (in minutes since midnight) |
+| time_arrive          | The time that the individual typically arrives at work (in minutes since midnight) |
+| time_commuting       | The length of time that the individual typically travels to work (in minutes) |
+| weights              | Weighting Column                                                            |
