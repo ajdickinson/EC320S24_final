@@ -41,7 +41,7 @@ if (!requireNamespace("here", quietly = TRUE)) {
   install.packages("here")
 }
 
-# Load the 'here' package
+# Load packages
 library(here)
 library(tidyverse)
 library(broom)
